@@ -23,3 +23,4 @@ models.forEach((model) => {
   module.exports[model] = sequelize.import(`${__dirname}/../models/${model}.js`);
 });
 
+module.exports.sequelize = sequelize;

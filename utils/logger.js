@@ -1,7 +1,7 @@
 const bunyan = require('bunyan');
 
-const log = bunyan.createLogger({ name: 'areakings-api' });
-log.info('Logger is initialized');
+const logger = bunyan.createLogger({ name: 'areakings-api' });
+logger.info('Logger is initialized');
 
-global.Logger = log;
-module.exports = log;
+global.Logger = logger;
+module.exports = logger;
