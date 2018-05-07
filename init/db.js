@@ -19,8 +19,11 @@ const models = [
   'User',
 ];
 
+global.Models = {};
 models.forEach((model) => {
   module.exports[model] = sequelize.import(`${__dirname}/../models/${model}.js`);
+  global.Models[model] = module.exports[model];
 });
 
+global.Models.sequelize = sequelize;
 module.exports.sequelize = sequelize;

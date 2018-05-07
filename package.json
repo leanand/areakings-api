@@ -6,7 +6,7 @@
   "scripts": {
     "test": "test",
     "eslint": "eslint .",
-    "serve:loc": "eslint . && node index.js | bunyan",
+    "serve:loc": "eslint . && NODE_PATH=. node index.js | bunyan",
     "watch": "nodemon --exec 'npm run serve:loc'",
     "serve:dev": "export NODE_ENV=development && node index.js",
     "serve:stg": "export NODE_ENV=stage && node index.js",
@@ -15,10 +15,15 @@
   "author": "Lovelin Anand",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "bunyan": "^1.8.12",
+    "catchify": "^2.6.1",
     "config": "^1.30.0",
+    "enforce-node-path": "^1.0.0",
+    "lodash": "^4.17.10",
     "mysql2": "^1.5.3",
     "restify": "^7.1.1",
+    "restify-errors": "^6.0.0",
     "sequelize": "^4.37.6"
   },
   "devDependencies": {

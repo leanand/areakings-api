@@ -1,3 +1,4 @@
 module.exports = (api) => {
-  require('../v/1/status')(api); // eslint-disable-line global-require
+  require('../v/1/status')(api);
+  require('../v/1/register')(api);
 };
