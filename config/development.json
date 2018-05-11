@@ -6,5 +6,6 @@
     "password": "password",
     "database": "areakings-dev",
     "dialect": "mysql"
-  }
+  },
+  "logLevel": "debug"
 }

@@ -1,10 +1,11 @@
 {
-  "port": "3001",
+  "port": "4001",
   "db": {
     "name": "localhost",
     "username": "root",
     "password": "password",
-    "database": "areakings-dev",
+    "database": "areakings-test",
     "dialect": "mysql"
-  }
+  },
+  "logLevel": "fatal"
 }

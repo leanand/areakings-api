@@ -2,7 +2,8 @@
   "extends": "airbnb-base",
   "globals": {
     "Logger": true,
-    "Models": true
+    "Models": true,
+    "Server": true
   },
   "rules": {
     "comma-dangle": 0,
@@ -10,5 +11,9 @@
     "no-unused-vars": 0,
     "no-underscore-dangle": 0,
     "import/no-unresolved": 0,
+  },
+  "env": {
+    "node": true,
+    "mocha": true
   }
 }

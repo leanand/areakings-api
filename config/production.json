@@ -4,7 +4,8 @@
     "name": "localhost",
     "username": "root",
     "password": "password",
-    "database": "areakings-dev",
+    "database": "areakings-prod",
     "dialect": "mysql"
-  }
+  },
+  "logLevel": "fatal"
 }

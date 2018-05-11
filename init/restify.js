@@ -24,4 +24,5 @@ server.listen(port, () => {
   Logger.info('%s listening at %s', server.name, server.url);
 });
 
+global.Server = server;
 module.exports = server;
