@@ -1,0 +1,6 @@
+SQL
+
+1. Use Singular for Table Names.
+2. Use '_' to separate multiple words.
+3. Use CapitalWord for Table names.
+4. Use lower case for column names.

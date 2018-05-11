@@ -7,12 +7,15 @@ const sequelize = new Sequelize({
   username: config.get('db.username'),
   password: config.get('db.password'),
   dialect: config.get('db.dialect'),
+  database: config.get('db.database'),
+  logging: Logger.info.bind(Logger),
 });
 
 sequelize.authenticate().then(() => {
   Logger.info('Db successfully connected!');
 }).catch((err) => {
   Logger.error('Cannot connect DB', err);
+  throw err;
 });
 
 const models = [
