@@ -9,13 +9,24 @@ const sequelize = new Sequelize({
   dialect: config.get('db.dialect'),
   database: config.get('db.database'),
   logging: Logger.info.bind(Logger),
+  define: {
+    timestamps: true,
+    charset: 'utf8',
+    underscored: false,
+  },
+  pool: {
+    max: 10,
+    min: 0,
+    idle: 1000,
+  },
 });
 
 sequelize.authenticate().then(() => {
   Logger.info('Db successfully connected!');
 }).catch((err) => {
   Logger.error('Cannot connect DB', err);
-  throw err;
+  throw new Error('Cannot Connect DB', err);
+  // process.exit(1);
 });
 
 const models = [

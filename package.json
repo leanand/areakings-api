@@ -4,9 +4,9 @@
   "description": "API for AreaKings",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_PATH='.' NODE_ENV='test' mocha tests/*.js v/1/*/*.spec.js",
+    "test": "NODE_PATH='.' NODE_ENV='test' mocha tests/helpers/setup.js tests/*.js v/1/*/*.spec.js",
     "lint": "eslint .",
-    "serve:loc": "eslint . && NODE_PATH=. NODE_ENV=local node index.js | bunyan",
+    "serve:loc": "eslint . && NODE_PATH=. NODE_ENV=development node index.js | bunyan",
     "watch": "nodemon --exec 'npm run serve:loc'",
     "serve:dev": "export NODE_ENV=development && node index.js",
     "serve:stg": "export NODE_ENV=stage && node index.js",
