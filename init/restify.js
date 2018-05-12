@@ -1,9 +1,6 @@
 const restify = require('restify');
-
 const config = require('config');
-
 const bunyan = require('bunyan');
-
 const bodyParser = require('body-parser');
 
 const server = restify.createServer({

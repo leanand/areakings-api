@@ -15,6 +15,7 @@
   "author": "Lovelin Anand",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
     "bunyan": "^1.8.12",
     "catchify": "^2.6.1",

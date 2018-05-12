@@ -7,5 +7,5 @@
     "database": "areakings-test",
     "dialect": "mysql"
   },
-  "logLevel": "error"
+  "logLevel": "warn"
 }

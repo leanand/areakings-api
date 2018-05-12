@@ -1,6 +1,7 @@
 const Register = require('./register.controller');
-const Utils = require('utils/helpers.js');
+const { checkParams, handle } = require('utils/helpers.js');
 
+const requiredParams = ['firstName', 'lastName', 'email', 'password'];
 module.exports = (api) => {
-  api.post('/v/1/register/signup', Utils.checkParams(['firstName', 'lastName', 'phoneNumber']), Utils.handle(Register.signup));
+  api.post('/v/1/register/signup', checkParams(requiredParams), handle(Register.signup));
 };

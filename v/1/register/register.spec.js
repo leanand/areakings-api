@@ -18,10 +18,12 @@ describe('Register', () => {
   it('POST /v/1/register/signup : should create user', (done) => {
     chai.request(Server)
       .post('/v/1/register/signup')
-      .send({ firstName: 'Vikram', lastName: 'Vedha', phoneNumber: 6073041349 })
+      .send({
+        firstName: 'Vikram', lastName: 'Vedha', email: 'anand@gmail.com', password: 'testing'
+      })
       .end((err, res) => {
         res.should.have.status(200);
-        Models.User.find({ where: { phoneNumber: 6073041349 } }).then((row) => {
+        Models.User.findOne({ where: { email: 'anand@gmail.com' } }).then((row) => {
           expect(row).to.be.not.a('null');
           done();
         });
@@ -30,7 +32,9 @@ describe('Register', () => {
   it('POST /v/1/register/signup : should not create user, it is existing already', (done) => {
     chai.request(Server)
       .post('/v/1/register/signup')
-      .send({ firstName: 'Vikram', lastName: 'Vedha', phoneNumber: 6073041349 })
+      .send({
+        firstName: 'Vikram', lastName: 'Vedha', email: 'anand@gmail.com', password: 'testing'
+      })
       .end((err, res) => {
         res.should.have.status(422);
         done();

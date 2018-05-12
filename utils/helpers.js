@@ -1,5 +1,8 @@
 const _ = require('lodash');
 const errors = require('restify-errors');
+const bcrypt = require('bcrypt');
+
+const SALT_ROUNDS = 10;
 
 const checkParams = arr => ((req, res, next) => {
   const missingParams = [];
@@ -38,8 +41,11 @@ const handle = fn => (async (req, res, next) => {
   }
 });
 
+const generateHash = async pwdString => (bcrypt.hash(pwdString, SALT_ROUNDS));
+
 module.exports = {
   checkParams,
   handleError,
-  handle
+  handle,
+  generateHash
 };
