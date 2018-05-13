@@ -8,11 +8,7 @@ const signup = async (req, res, next) => {
   const {
     firstName, lastName, email, password
   } = req.body;
-  const [errorExisting, isUserExists] = await catchify(User.findOne({
-    where: {
-      email
-    }
-  }));
+  const [errorExisting, isUserExists] = await catchify(User.findByEmail(email));
   if (errorExisting) {
     return Utils.handleError(res, next, errorExisting);
   }

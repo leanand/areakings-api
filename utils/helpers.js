@@ -43,9 +43,15 @@ const handle = fn => (async (req, res, next) => {
 
 const generateHash = async pwdString => (bcrypt.hash(pwdString, SALT_ROUNDS));
 
+const requireUncached = (moduleName) => {
+  delete require.cache[require.resolve(moduleName)];
+  return require(moduleName); // eslint-disable-line import/no-dynamic-require
+};
+
 module.exports = {
   checkParams,
   handleError,
   handle,
-  generateHash
+  generateHash,
+  requireUncached
 };

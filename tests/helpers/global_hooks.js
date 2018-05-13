@@ -7,7 +7,5 @@ before((done) => {
 after((done) => {
   Server.close();
   Models.sequelize.close()
-    .then(() => Models.sequelize.connectionManager.pool.drain())
-    .then(() => Models.sequelize.connectionManager.pool.clear())
     .then(() => done());
 });

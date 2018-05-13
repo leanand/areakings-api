@@ -1,5 +1,5 @@
-module.exports = (sequelize, DataTypes) => (
-  sequelize.define('User', {
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define('User', {
     firstName: {
       type: DataTypes.STRING,
       allowNull: false
@@ -19,5 +19,9 @@ module.exports = (sequelize, DataTypes) => (
       type: DataTypes.STRING,
       allowNull: false
     }
-  })
-);
+  });
+
+  User.findByEmail = email => User.findOne({ where: { email } });
+
+  return User;
+};

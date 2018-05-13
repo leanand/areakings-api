@@ -1,44 +1,36 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const Utils = require('utils/helpers');
 
 chai.use(chaiHttp);
 const should = chai.should();
 const { expect } = chai;
-require('tests/helpers/global_hooks.js');
 
 describe('Register', () => {
-  it('POST /v/1/register/signup : without any parameters, should return 400', (done) => {
-    chai.request(Server)
-      .post('/v/1/register/signup')
-      .end((err, res) => {
-        res.should.have.status(400);
-        done();
-      });
+  Utils.requireUncached('tests/helpers/test_hooks.js');
+
+  it('POST /v/1/register/signup : without any parameters, should return 400', async () => {
+    const res = await chai.request(Server)
+      .post('/v/1/register/signup');
+    res.should.have.status(400);
   });
-  it('POST /v/1/register/signup : should create user', (done) => {
-    chai.request(Server)
+  it('POST /v/1/register/signup : should create user', async () => {
+    const res = await chai.request(Server)
       .post('/v/1/register/signup')
       .send({
         firstName: 'Vikram', lastName: 'Vedha', email: 'anand@gmail.com', password: 'testing'
-      })
-      .end((err, res) => {
-        res.should.have.status(200);
-        Models.User.findOne({ where: { email: 'anand@gmail.com' } }).then((row) => {
-          expect(row).to.be.not.a('null');
-          done();
-        });
       });
+    res.should.have.status(200);
+    const row = Models.User.findByEmail('anand@gmail.com');
+    expect(row).to.be.not.a('null');
   });
-  it('POST /v/1/register/signup : should not create user, it is existing already', (done) => {
-    chai.request(Server)
+  it('POST /v/1/register/signup : should not create user, it is existing already', async () => {
+    const res = await chai.request(Server)
       .post('/v/1/register/signup')
       .send({
         firstName: 'Vikram', lastName: 'Vedha', email: 'anand@gmail.com', password: 'testing'
-      })
-      .end((err, res) => {
-        res.should.have.status(422);
-        done();
       });
+    res.should.have.status(422);
   });
 });
 
