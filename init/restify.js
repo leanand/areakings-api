@@ -9,7 +9,7 @@ const server = restify.createServer({
 const port = config.get('port');
 
 
-server.use(bodyParser());
+server.use(bodyParser.json());
 server.on('after', restify.plugins.auditLogger({
   log: Logger,
   event: 'after',

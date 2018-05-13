@@ -7,5 +7,9 @@
     "database": "areakings-test",
     "dialect": "mysql"
   },
-  "logLevel": "warn"
+  "logLevel": "warn",
+  "jwt": {
+    "secret_key": "areakings-dev",
+    "expiry" : 86400
+  }
 }

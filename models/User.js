@@ -23,5 +23,11 @@ module.exports = (sequelize, DataTypes) => {
 
   User.findByEmail = email => User.findOne({ where: { email } });
 
+  User.prototype.toJSON = function toJSON() {
+    const values = Object.assign({}, this.get());
+    delete values.password;
+    return values;
+  };
+
   return User;
 };
