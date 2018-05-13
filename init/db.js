@@ -30,6 +30,7 @@ sequelize.authenticate().then(() => {
 
 const models = [
   'User',
+  'Team'
 ];
 
 global.Models = {};
@@ -37,6 +38,11 @@ models.forEach((model) => {
   module.exports[model] = sequelize.import(`${__dirname}/../models/${model}.js`);
   global.Models[model] = module.exports[model];
 });
+
+Models.User.hasOne(Models.Team, { as: 'admin'});
+Models.Team.belongsToMany(Models.User, {through: 'UserTeam'});
+Models.User.belongsToMany(Models.Team, {through: 'UserTeam'});
+
 
 global.Models.sequelize = sequelize;
 module.exports.sequelize = sequelize;

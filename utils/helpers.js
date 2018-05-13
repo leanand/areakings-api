@@ -25,7 +25,7 @@ const checkParams = arr => ((req, res, next) => {
 });
 
 const handleError = (res, next, err) => {
-  Logger.error(err, 'Error while handling request', req);
+  Logger.error(err, 'Error while handling request');
   next(err);
 };
 
