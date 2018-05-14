@@ -30,7 +30,8 @@ sequelize.authenticate().then(() => {
 
 const models = [
   'User',
-  'Team'
+  'Team',
+  'Request'
 ];
 
 global.Models = {};
@@ -39,9 +40,10 @@ models.forEach((model) => {
   global.Models[model] = module.exports[model];
 });
 
-Models.User.hasOne(Models.Team, { as: 'admin'});
-Models.Team.belongsToMany(Models.User, {through: 'UserTeam'});
-Models.User.belongsToMany(Models.Team, {through: 'UserTeam'});
+Models.User.hasOne(Models.Team, { as: 'admin', foreignKey: { allowNull: false } });
+Models.Request.belongsTo(Models.User, { as: 'requester', foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
+Models.Team.belongsToMany(Models.User, { through: 'UserTeam' });
+Models.User.belongsToMany(Models.Team, { through: 'UserTeam' });
 
 
 global.Models.sequelize = sequelize;

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  Team.findByAdmin= adminId => User.findOne({ where: { adminId } });
+  Team.findByAdmin = adminId => Team.findOne({ where: { adminId } });
 
   return Team;
 };
