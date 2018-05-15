@@ -33,9 +33,11 @@ const handle = fn => (async (req, res, next) => {
   try {
     await fn(req, res, next);
   } catch (err) {
-    Logger.error('Error while handling request', err, req, res);
     if (!(err instanceof errors.HttpError)) {
       err = new errors.InternalServerError(err); // eslint-disable-line no-ex-assign
+      Logger.error('Error while handling request', err, req, res);
+    } else {
+      Logger.info('Intentional errors: ', err, req, res);
     }
     next(err);
   }
@@ -43,15 +45,10 @@ const handle = fn => (async (req, res, next) => {
 
 const generateHash = async pwdString => (bcrypt.hash(pwdString, SALT_ROUNDS));
 
-const requireUncached = (moduleName) => {
-  delete require.cache[require.resolve(moduleName)];
-  return require(moduleName); // eslint-disable-line import/no-dynamic-require
-};
 
 module.exports = {
   checkParams,
   handleError,
   handle,
-  generateHash,
-  requireUncached
+  generateHash
 };

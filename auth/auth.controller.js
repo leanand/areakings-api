@@ -7,10 +7,9 @@ const authHelpers = require('./helpers');
 const { User } = Models;
 const login = async (req, res, next) => {
   const { email, password } = req.body;
-  const [userError, userRow] = await catchify(User.findByEmail(email));
+  const userRow = await User.findByEmail(email);
   if (!userRow) {
-    Logger.debug('User does not exists', req.body);
-    return next(new errors.NotFoundError('User does not exists'));
+    throw new errors.NotFoundError('User does not exists');
   }
   const hashPassword = userRow.get('password');
   const match = await bcrypt.compare(password, hashPassword);
@@ -18,7 +17,7 @@ const login = async (req, res, next) => {
     const jwtToken = authHelpers.createJWTToken(authHelpers.getJWTPayload(userRow));
     res.send(200, { token: jwtToken });
   } else {
-    return next(new errors.UnauthorizedError('Incorrect email/password'));
+    throw new errors.UnauthorizedError('Incorrect email/password');
   }
   return next();
 };

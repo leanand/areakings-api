@@ -5,7 +5,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       values: ['join-team', 'invite-user', 'invite-match']
     },
-    requestedAt: {
+    status: {
+      type: DataTypes.ENUM,
+      allowNull: false,
+      values: ['pending', 'accepted', 'rejected']
+    },
+    payload: {
+      type: DataTypes.JSON
+    },
+    requestedTo: {
       type: DataTypes.INTEGER,
       allowNull: false
     }

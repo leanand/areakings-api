@@ -1,6 +1,6 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const Utils = require('utils/helpers');
+const Utils = require('tests/helpers/utils');
 
 chai.use(chaiHttp);
 const should = chai.should();

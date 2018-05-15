@@ -3,5 +3,5 @@ const { checkParams, handle } = require('utils/helpers.js');
 const AuthHelper = require('auth/helpers');
 
 module.exports = (api) => {
-  api.post('/v/1/request', AuthHelper.isAuthenticated(), handle(RequestController.create));
+  api.post('/v/1/request', [AuthHelper.isAuthenticated(), checkParams(['type', 'requestedTo'])], handle(RequestController.create));
 };
