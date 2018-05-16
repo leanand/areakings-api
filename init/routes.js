@@ -3,5 +3,6 @@ module.exports = (api) => {
   require('../v/1/register')(api);
   require('../v/1/user')(api);
   require('../v/1/request')(api);
+  require('../v/1/team')(api);
   require('../auth')(api);
 };

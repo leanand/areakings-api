@@ -29,9 +29,9 @@ const handleError = (res, next, err) => {
   next(err);
 };
 
-const handle = fn => (async (req, res, next) => {
+const handle = handleFn => (async (req, res, next) => {
   try {
-    await fn(req, res, next);
+    await handleFn(req, res, next);
   } catch (err) {
     if (!(err instanceof errors.HttpError)) {
       err = new errors.InternalServerError(err); // eslint-disable-line no-ex-assign

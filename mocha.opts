@@ -3,4 +3,4 @@ tests/*.js
 v/1/status/status.spec.js
 v/1/register/register.spec.js
 auth/auth.spec.js
-v/1/request/request.spec.js
+v/1/team/team.spec.js
