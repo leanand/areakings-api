@@ -45,10 +45,23 @@ const handle = handleFn => (async (req, res, next) => {
 
 const generateHash = async pwdString => (bcrypt.hash(pwdString, SALT_ROUNDS));
 
+const handleTransaction = async (handleFn) => {
+  let transaction;
+  try {
+    transaction = await Models.sequelize.transaction();
+    const output = await handleFn(transaction);
+    await transaction.commit();
+    return output;
+  } catch (err) {
+    await transaction.rollback();
+    throw err;
+  }
+};
 
 module.exports = {
   checkParams,
   handleError,
   handle,
-  generateHash
+  generateHash,
+  handleTransaction
 };

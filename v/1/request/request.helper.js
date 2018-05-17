@@ -4,21 +4,22 @@ const CONSTANTS = require('utils/constants');
 
 const { Team, Request } = Models;
 
-const handleCreateJoinTeam = async (requesterId, requestedTo, payload) => {
+const handleJoinTeam = async (requesterId, requestedTo, payload) => {
   const teamRow = await Team.findById(requestedTo);
   if (!teamRow) {
     throw new errors.ResourceNotFoundError('Team does not exists!');
   }
   const row = await Request.create({
-    type:
+    type: CONSTANTS.REQUEST_TYPES.JOIN_TEAM,
     requesterId,
     requestedTo,
-    payload
+    payload,
+    status: CONSTANTS.REQUEST_STATUS.PENDING
   });
 
-  return {};
+  return row.toJSON();
 };
 
 module.exports = {
-  handleCreateJoinTeam
+  handleJoinTeam
 };

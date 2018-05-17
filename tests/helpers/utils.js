@@ -16,8 +16,8 @@ const createAndLogin = async () => {
   const firstName = faker.name.firstName();
   const lastName = faker.name.lastName();
   const email = faker.internet.email();
-
-  const resSignup = await agent.post('/v/1/register/signup')
+  const agentPost = agent.post('/v/1/register/signup');
+  const resSignup = await agentPost
     .send({
       firstName, lastName, email, password: 'vedhalovesvikram'
     });
@@ -34,7 +34,16 @@ const createAndLogin = async () => {
   resUser.body.should.have.a.property('email').that.to.equal(email);
   resUser.body.should.have.a.property('firstName').that.to.equal(firstName);
   resUser.body.should.have.a.property('lastName').that.to.equal(lastName);
-  return { agent, JWTToken, userDetails: { firstName, lastName, email } };
+  agent.AKdetails = {
+    JWTToken,
+    firstName,
+    lastName,
+    email,
+    id: resUser.body.id
+  };
+  agent.getToken = () => `Bearer ${agent.AKdetails.JWTToken}`;
+
+  return { agent };
 };
 
 module.exports = {

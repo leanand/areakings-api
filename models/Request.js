@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     status: {
       type: DataTypes.ENUM,
       allowNull: false,
-      values: ['pending', 'accepted', 'rejected']
+      values: ['pending', 'accepted', 'rejected'],
+      default: 'pending'
     },
     payload: {
       type: DataTypes.JSON
